@@ -1,0 +1,6 @@
+{
+	"faker:populate": {
+		"description": "Populate catalog with Faker",
+		"dev": true
+	}
+}

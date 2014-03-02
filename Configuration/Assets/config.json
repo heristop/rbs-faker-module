@@ -1,0 +1,21 @@
+// default configuration module
+// you can override it with your project.json
+{
+	"Rbs_Media_Image":{
+		"custom_formatters":{
+			"path":{
+				"method": "storeImage",
+				"parameters":{
+					"width": "320",
+					"height": "240"
+				}
+			},
+			"mimeType":{
+				"method": "mimeType",
+				"parameters":{
+					"value": "image/jpeg"
+				}
+			}
+		}
+	}
+}

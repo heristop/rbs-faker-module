@@ -1,0 +1,10 @@
+{
+	"license": "MIT",
+	"name": "heristop/rbs-module-faker",
+	"type":"rbschange-module",
+	"require": {
+		"rbschange/plugin-installer": "*",
+		"rbschange/core": "self.version",
+		"fzaninotto/faker": "1.3.*"
+	}
+}
