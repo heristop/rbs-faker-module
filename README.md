@@ -1,21 +1,23 @@
 # RBSChange Module Faker
 
-Have a project [RBSChange 4](https://github.com/RBSChange/Change), but your database is empty?
+Have a [RBSChange 4](https://github.com/RBSChange/Change) project, but your database is empty?
 
 This module provides a command to load random data for products or orders, for instance.
 It integrates [Faker](https://github.com/fzaninotto/Faker), a PHP library that generates fake data.
 
 ## Installation
 
-Add the requirement [`heristop/module-faker`](https://packagist.org/packages/heristop/rbs-module-faker) to your `composer.json` file:
+Add the requirement to your `composer.json` file:
 
 ``` json
 {
     "require": {
-        "heristop/rbs-module-faker": "*"
+        "fzaninotto/faker": "1.3.*"
     }
 }
 ```
+
+Copy sources in `Plugins/Modules/Heri/Faker`.
 
 Install the module in the modules manager.
 
@@ -26,6 +28,7 @@ How it's works?
 Specify entities to load, and the number of documents you want to create, in your configuration file `project.json`:
 
 ``` json
+{
     "Heri":{
         "Faker":{
             "entities":{
@@ -44,11 +47,12 @@ Specify entities to load, and the number of documents you want to create, in you
             }
         }
     }
+}
 ```
 
 Lastly, run this command:
 
-``` json
+``` sh
     php bin/change.phar faker:populate
 ```
 
@@ -59,11 +63,12 @@ In the previous example, the `Image` and `Brand` models share a relationship. If
 You can add your own formatter for each column of each entity, with or without arguments:
 
 ``` json
+{
     "Heri":{
         "Faker":{
             "entities":{
                 "Rbs_Media_Image":{
-                    "number": 1,
+                    "number": 10,
                     "custom_formatters":{
                         "path":{
                             "method": "storeImage",
@@ -78,15 +83,17 @@ You can add your own formatter for each column of each entity, with or without a
             }
         }
     }
+}
 ```
 
-With the example above, we choose to generate an image of cat:
+With the example above, we choose to generate images of cats:
 
-![ScreenShot](https://raw.github.com/heristop/HeriFakerModule/master/Resources/doc/media_sample.png)
+![ScreenShot](https://raw.github.com/heristop/RbsModuleFaker/master/Resources/doc/media_sample.png)
 
 You can use all formatters provided by Faker:
 
 ``` json
+{
     "Heri":{
         "Faker":{
             "entities":{
@@ -107,6 +114,7 @@ You can use all formatters provided by Faker:
             }
         }
     }
+}
 ```
 
 ## License
