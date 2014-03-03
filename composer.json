@@ -1,9 +1,10 @@
 {
-	"license": "AGPL-3.0",
-	"name": "rbs/brand",
+	"license": "MIT",
+	"name": "heri/faker",
 	"type":"rbschange-module",
 	"require": {
 		"rbschange/plugin-installer": "*",
-		"rbschange/core": "self.version"
+		"rbschange/core": "self.version",
+		"fzaninotto/faker": "1.3.*"
 	}
 }

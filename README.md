@@ -1,4 +1,4 @@
-# Faker module for RBSChange
+# RBSChange Faker module
 
 Have a [RBSChange 4](https://github.com/RBSChange/Change) project, but your database is empty?
 
@@ -12,12 +12,12 @@ Add the requirement to your `composer.json` file:
 ``` json
 {
     "require": {
-        "heristop/rbs-faker-module": "*"
+        "heri/faker": "*"
     }
 }
 ```
 
-Install the module in the modules manager.
+Then, install the module in the modules manager.
 
 ## Usage
 
