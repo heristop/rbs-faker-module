@@ -1,8 +1,9 @@
 {
-	"license": "MIT",
-	"name": "heristop/rbs-faker-module",
+	"license": "AGPL-3.0",
+	"name": "rbs/brand",
 	"type":"rbschange-module",
 	"require": {
-		"fzaninotto/faker": "1.3.*"
+		"rbschange/plugin-installer": "*",
+		"rbschange/core": "self.version"
 	}
 }

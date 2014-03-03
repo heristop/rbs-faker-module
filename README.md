@@ -1,4 +1,4 @@
-# RBSChange Module Faker
+# Faker module for RBSChange
 
 Have a [RBSChange 4](https://github.com/RBSChange/Change) project, but your database is empty?
 
@@ -12,12 +12,10 @@ Add the requirement to your `composer.json` file:
 ``` json
 {
     "require": {
-        "fzaninotto/faker": "1.3.*"
+        "heristop/rbs-faker-module": "*"
     }
 }
 ```
-
-Copy sources in `Plugins/Modules/Heri/Faker`.
 
 Install the module in the modules manager.
 
@@ -63,26 +61,21 @@ In the previous example, the `Image` and `Brand` models share a relationship. If
 You can add your own formatter for each column of each entity, with or without arguments:
 
 ``` json
-{
-    "Heri":{
-        "Faker":{
-            "entities":{
-                "Rbs_Media_Image":{
-                    "number": 10,
-                    "custom_formatters":{
-                        "path":{
-                            "method": "storeImage",
-                            "parameters":{
-                                "width": "320",
-                                "height": "240",
-                                "category": "cats"
-                            }
-                        }
-                    }
+    ...
+    "Rbs_Media_Image":{
+        "number": 10,
+        "custom_formatters":{
+            "path":{
+                "method": "storeImage",
+                "parameters":{
+                    "width": "320",
+                    "height": "240",
+                    "category": "cats"
                 }
             }
         }
     }
+    ...
 }
 ```
 
@@ -94,26 +87,22 @@ You can use all formatters provided by Faker:
 
 ``` json
 {
-    "Heri":{
-        "Faker":{
-            "entities":{
-                "Rbs_Stock_Sku":{
-                    "custom_formatters":{
-                        "ean13":{
-                            "method": "randomElement",
-                            "parameters":{
-                                "values": [
-                                    "1234567891234",
-                                    "1234567891235",
-                                    "1234567891236"
-                                ]
-                            }
-                        }
-                    }
+    ...
+    "Rbs_Stock_Sku":{
+        "custom_formatters":{
+            "ean13":{
+                "method": "randomElement",
+                "parameters":{
+                    "values": [
+                        "1234567891234",
+                        "1234567891235",
+                        "1234567891236"
+                    ]
                 }
             }
         }
     }
+    ...
 }
 ```
 
