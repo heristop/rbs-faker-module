@@ -28,6 +28,12 @@ class Populate
 		$generator->addProvider($provider);
 		$populator = new \Heri\Faker\Generators\Populator($generator, $documentManager);
 		
+		$entities = $configuration->getEntry('Heri/Faker/entities');
+		if (empty($entities))
+		{
+			throw new \Exception('Configure entities to populate in project.json');
+		}
+		
 		// load default module configuration
 		$customConfig = function()
 		{
@@ -39,7 +45,7 @@ class Populate
 			return array();
 		};
 		
-		$entities = array_merge_recursive($customConfig(), $configuration->getEntry('Heri/Faker/entities'));
+		$entities = array_merge_recursive($customConfig(), $entities);
 		if (empty($entities))
 		{
 			throw new \Exception('Configure entities to populate in project.json');
@@ -61,7 +67,7 @@ class Populate
 				}
 			}
 			
-			$number = isset($config['number']) ? $config['number'] : 5;
+			$number = isset($config['number']) ? $config['number'] : 0;
 			$populator->addEntity($entity, $number, $customColumnFormatters);
 		}
 		$insertedPKs = $populator->execute($transactionManager);

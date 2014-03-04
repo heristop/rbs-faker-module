@@ -92,6 +92,11 @@ class EntityPopulator
 						}
 					}
 					
+					if ($property->getType() == Property::TYPE_DOCUMENTARRAY)
+					{
+						return array();
+					}
+					
 					return null;
 				};
 				continue;

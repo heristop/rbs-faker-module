@@ -39,7 +39,7 @@ class Name
 			case 'upc':
 				return function() use($generator) { return $generator->randomNumber(12); };
 			case 'jan':
-				return function() use($generator) { return $generator->randomNumber(13); };
+				return function() use($generator) { return $generator->optional()->randomNumber(13); };
 			case 'publicationstatus':
 				return function() use($generator) { return $generator->publicationStatus; };
 			case 'first_name':
