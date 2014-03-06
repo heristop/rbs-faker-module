@@ -1,20 +1,38 @@
-// default configuration module
-// you can override it with your project.json
+/**
+ * default configuration module
+ * you can override it with your project.json
+ */
 {
 	"Rbs_Media_Image":{
 		"custom_formatters":{
 			"path":{
-				"method": "storeImage",
-				"parameters":{
-					"width": "320",
-					"height": "240"
-				}
+				"method": "storeImage"
 			},
 			"mimeType":{
 				"method": "mimeType",
 				"parameters":{
 					"value": "image/jpeg"
 				}
+			}
+		}
+	},
+	"Rbs_Brand_Brand":{
+		"custom_formatters":{
+			"label":{
+				"method": "manufacturer"
+			},
+			"title":{
+				"method": "manufacturer"
+			}
+		}
+	},
+	"Rbs_Catalog_Product":{
+		"custom_formatters":{
+			"label":{
+				"method": "product"
+			},
+			"title":{
+				"method": "product"
 			}
 		}
 	}

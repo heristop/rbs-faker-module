@@ -1,10 +1,19 @@
 {
-	"license": "MIT",
 	"name": "heri/faker",
 	"type":"rbschange-module",
+	"description": "Use Faker library to populate your RBSChange 4 database with fake data",
+	"keywords": [ "rbschange", "faker" ],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Alexandre Mogère"
+		}
+	],
+	"prefer-stable":true,
+	"minimum-stability":"dev",
 	"require": {
 		"rbschange/plugin-installer": "*",
 		"rbschange/core": "self.version",
-		"fzaninotto/faker": "1.3.*"
+		"fzaninotto/faker": "dev-master"
 	}
 }

@@ -77,8 +77,9 @@ class Populator
 				}
 			}
 		}
-		catch (\Exception $e)
+		catch (\Change\Documents\PropertiesValidationException $e)
 		{
+			$errors = $e->getPropertiesErrors();
 			throw $transactionManager->rollBack($e);
 		}
 		

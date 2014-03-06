@@ -127,7 +127,7 @@ class EntityPopulator
 		
 		foreach ($this->getColumnFormatters() as $column => $format)
 		{
-			//var_dump($column);
+			var_dump($column);
 			if (null !== $format) {
 				$document->getDocumentModel()->setPropertyValue(
 					$document,

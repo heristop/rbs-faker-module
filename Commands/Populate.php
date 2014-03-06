@@ -5,6 +5,8 @@ use Change\Commands\Events\Event;
 use Faker\Factory;
 use Zend\Json\Json;
 
+use Heri\Faker\Configuration\FormatterFactory;
+
 /**
  * @name \Heri\Faker\Commands\Populate
  */
@@ -17,13 +19,14 @@ class Populate
 	{
 		$applicationServices = $event->getApplicationServices();
 		$documentManager = $applicationServices->getDocumentManager();
-		$LCID = $documentManager->getLCID();
 		$transactionManager = $applicationServices->getTransactionManager();
 		$storageManager = $applicationServices->getStorageManager();
 		$configuration = $event->getApplication()->getConfiguration();
 		
+		$LCID = $documentManager->getLCID();
 		$generator = \Faker\Factory::create($LCID);
-		$provider = new \Heri\Faker\Providers\Document($generator);
+		$class = "\\Heri\\Faker\\Providers\\$LCID\\Ecommerce";
+		$provider = new $class($generator);
 		$provider->setStorageManager($storageManager);
 		$generator->addProvider($provider);
 		$populator = new \Heri\Faker\Generators\Populator($generator, $documentManager);
@@ -31,7 +34,7 @@ class Populate
 		$entities = $configuration->getEntry('Heri/Faker/entities');
 		if (empty($entities))
 		{
-			throw new \Exception('Configure entities to populate in project.json');
+			throw new \Exception("Configure entities to populate in 'project.json'");
 		}
 		
 		// load default module configuration
@@ -45,21 +48,18 @@ class Populate
 			return array();
 		};
 		
-		$entities = array_merge_recursive($customConfig(), $entities);
-		if (empty($entities))
-		{
-			throw new \Exception('Configure entities to populate in project.json');
-		}
-		
-		$customColumnFormatters = array();
+		$entities = FormatterFactory::merge($entities, $customConfig());
 		foreach ($entities as $entity => $config)
 		{
+			if (!isset($config['number'])) continue;
+			
 			// manage custom formatters
+			$customColumnFormatters = array();
 			if (isset($config['custom_formatters']))
 			{
 				foreach ($config['custom_formatters'] as $property => $param)
 				{
-					$customColumnFormatters[$property] = \Heri\Faker\Configuration\FormatterFactory::createClosure(
+					$customColumnFormatters[$property] = FormatterFactory::createClosure(
 						$generator,
 						$param['method'],
 						isset($param['parameters']) ? $param['parameters'] : array()
@@ -67,13 +67,13 @@ class Populate
 				}
 			}
 			
-			$number = isset($config['number']) ? $config['number'] : 0;
-			$populator->addEntity($entity, $number, $customColumnFormatters);
+			$populator->addEntity($entity, $config['number'], $customColumnFormatters);
 		}
 		$insertedPKs = $populator->execute($transactionManager);
 		
 		$response = $event->getCommandResponse();
-		foreach ($insertedPKs as $class => $pks) {
+		foreach ($insertedPKs as $class => $pks)
+		{
 			$response->addInfoMessage(sprintf(
 				'Inserted <comment>%s</comment> new document <comment>%s</comment>',
 				count($pks),

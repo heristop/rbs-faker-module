@@ -33,13 +33,15 @@ class Name
 				return function() use ($generator) { return $generator->code; };
 			case 'active':
 				return function() use ($generator) { return $generator->boolean; };
+			case 'description':
+				return function() use ($generator) { return $generator->realText; };
 			case 'ean13':
-			case 'isbn':
-				return function() use($generator) { return $generator->randomNumber(13); };
+				return function() use($generator) { return $generator->barcode(13); };
 			case 'upc':
-				return function() use($generator) { return $generator->randomNumber(12); };
+				return function() use($generator) { return $generator->optional()->barcode(12); };
 			case 'jan':
-				return function() use($generator) { return $generator->optional()->randomNumber(13); };
+			case 'isbn':
+				return function() use($generator) { return $generator->optional()->barcode(13); };
 			case 'publicationstatus':
 				return function() use($generator) { return $generator->publicationStatus; };
 			case 'first_name':
