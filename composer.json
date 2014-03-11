@@ -2,7 +2,7 @@
 	"name": "heri/faker",
 	"type":"rbschange-module",
 	"description": "Use Faker library to populate your RBSChange 4 database with fake data",
-	"keywords": [ "rbschange", "faker" ],
+	"keywords": [ "rbschange", "faker", "ecommerce" ],
 	"license": "MIT",
 	"authors": [
 		{
@@ -14,6 +14,7 @@
 	"require": {
 		"rbschange/plugin-installer": "*",
 		"rbschange/core": "self.version",
+		"phpoption/phpoption": "1.4.0",
 		"fzaninotto/faker": "dev-master"
 	}
 }

@@ -1,0 +1,7 @@
+<phpunit bootstrap="../../../../../ChangeTests/Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Faker Module Test Suite">
+            <directory>./Configuration</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

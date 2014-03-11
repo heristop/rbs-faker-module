@@ -56,11 +56,12 @@ Lastly, run this command:
 
 In the previous example, the `Image` and `Brand` models share a relationship. If `Image` documents are populated first, Faker is smart enough to relate the populated Brand documents to one of the populated `Image` documents.
 
-## Pro-Tips Configuration
+## ProTips Configuration
 
 You can add your own formatter for each column of each entity, with or without arguments:
 
 ``` json
+{
     "Rbs_Media_Image":{
         "number": 10,
         "custom_formatters":{
@@ -74,6 +75,7 @@ You can add your own formatter for each column of each entity, with or without a
             }
         }
     }
+}
 ```
 
 With the example above, we choose to generate images of cats:

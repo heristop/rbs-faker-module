@@ -6,7 +6,11 @@
 	"Rbs_Media_Image":{
 		"custom_formatters":{
 			"path":{
-				"method": "storeImage"
+				"method": "storeImage",
+				"parameters":{
+					"width": "320",
+					"height": "240"
+				}
 			},
 			"mimeType":{
 				"method": "mimeType",
@@ -25,6 +29,9 @@
 				"method": "manufacturer"
 			}
 		}
+	},
+	"Rbs_Stock_Sku":{
+		
 	},
 	"Rbs_Catalog_Product":{
 		"custom_formatters":{

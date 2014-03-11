@@ -1,10 +1,16 @@
 <?php
+
+/**
+ * This file is part of the Faker module.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace Heri\Faker\Commands;
 
 use Change\Commands\Events\Event;
-use Faker\Factory;
-use Zend\Json\Json;
-
 use Heri\Faker\Configuration\FormatterFactory;
 
 /**
@@ -12,6 +18,8 @@ use Heri\Faker\Configuration\FormatterFactory;
  */
 class Populate
 {
+	const DEFAULT_SECTION = "Hightech";
+	
 	/**
 	 * @param Event $event
 	 */
@@ -25,30 +33,16 @@ class Populate
 		
 		$LCID = $documentManager->getLCID();
 		$generator = \Faker\Factory::create($LCID);
-		$class = "\\Heri\\Faker\\Providers\\$LCID\\Ecommerce";
+		$section = FormatterFactory::findSectionByLCID($configuration, $LCID)->getOrElse(self::DEFAULT_SECTION);
+		$class = "\\Heri\\Faker\\Providers\\$LCID\\$section";
 		$provider = new $class($generator);
 		$provider->setStorageManager($storageManager);
 		$generator->addProvider($provider);
 		$populator = new \Heri\Faker\Generators\Populator($generator, $documentManager);
 		
-		$entities = $configuration->getEntry('Heri/Faker/entities');
-		if (empty($entities))
-		{
-			throw new \Exception("Configure entities to populate in 'project.json'");
-		}
+		// load configuration
+		$entities = FormatterFactory::findEntities($configuration)->getOrElse(array());
 		
-		// load default module configuration
-		$customConfig = function()
-		{
-			$configPath = __DIR__ . '/../Configuration/Assets/config.json';
-			if (is_file($configPath))
-			{
-				return Json::decode(file_get_contents($configPath), Json::TYPE_ARRAY);
-			}
-			return array();
-		};
-		
-		$entities = FormatterFactory::merge($entities, $customConfig());
 		foreach ($entities as $entity => $config)
 		{
 			if (!isset($config['number'])) continue;
@@ -57,12 +51,11 @@ class Populate
 			$customColumnFormatters = array();
 			if (isset($config['custom_formatters']))
 			{
-				foreach ($config['custom_formatters'] as $property => $param)
+				foreach ($config['custom_formatters'] as $property => $options)
 				{
 					$customColumnFormatters[$property] = FormatterFactory::createClosure(
 						$generator,
-						$param['method'],
-						isset($param['parameters']) ? $param['parameters'] : array()
+						$options
 					);
 				}
 			}
