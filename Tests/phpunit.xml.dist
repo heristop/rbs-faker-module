@@ -2,6 +2,7 @@
     <testsuites>
         <testsuite name="Faker Module Test Suite">
             <directory>./Configuration</directory>
+            <directory>./Providers</directory>
         </testsuite>
     </testsuites>
 </phpunit>

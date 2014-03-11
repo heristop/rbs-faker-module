@@ -23,7 +23,7 @@ class FormatterFactoryTest extends TestCase
 			->method('foo')
 		;
 
-		$closure = FormatterFactory::createClosure($generator, 'foo');
+		$closure = FormatterFactory::createClosure($generator, array('method' => 'foo'));
 
 		$this->assertTrue(is_callable($closure));
 		$closure();
@@ -51,7 +51,10 @@ class FormatterFactoryTest extends TestCase
 		;
 		call_user_func_array(array($matcher, 'with'), $parameters);
 
-		$closure = FormatterFactory::createClosure($generator, 'foo', $parameters);
+		$closure = FormatterFactory::createClosure($generator, array(
+			'method' => 'foo',
+			'parameters' => $parameters
+		));
 
 		$this->assertTrue(is_callable($closure));
 		$closure();
@@ -65,7 +68,10 @@ class FormatterFactoryTest extends TestCase
 		$provider = new \Faker\Provider\Base($generator);
 		$generator->addProvider($provider);
 
-		$closure = FormatterFactory::createClosure($generator, 'randomElement', array($elements));
+		$closure = FormatterFactory::createClosure($generator, array(
+			'method' => 'randomElement',
+			'parameters' =>  array($elements)
+		));
 
 		$this->assertTrue(is_callable($closure));
 		$randomElement = $closure();
@@ -79,7 +85,10 @@ class FormatterFactoryTest extends TestCase
 		$provider = new \Faker\Provider\DateTime($generator);
 		$generator->addProvider($provider);
 
-		$closure = FormatterFactory::createClosure($generator, 'dateTimeBetween', array('-1 day', '+1 day'));
+		$closure = FormatterFactory::createClosure($generator, array(
+			'method' => 'dateTimeBetween',
+			'parameters' => array('-1 day', '+1 day')
+		));
 
 		$this->assertTrue(is_callable($closure));
 		$dateTime = $closure();

@@ -11,9 +11,8 @@ env:
   - RBSCHANGE_VERSION=dev-master
   
 before_install:
- - composer require "rbschange/core":${RBSCHANGE_VERSION}
+ - composer require "rbschange/core:${RBSCHANGE_VERSION}"
  - composer update
- - mysql -e 'create database rbschangetest;'
 
 script:
  - cd Tests/

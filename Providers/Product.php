@@ -13,7 +13,7 @@ namespace Heri\Faker\Providers;
 use Change\Storage\StorageManager;
 use Change\Documents\Interfaces\Publishable;
 
-class RbsChange extends \Faker\Provider\Base
+class Product extends \Faker\Provider\Base
 {
 	protected $storageManager;
 	
@@ -36,13 +36,13 @@ class RbsChange extends \Faker\Provider\Base
 	 */
 	public function barcode($length)
 	{
-		$result = "";
+		$values = array();
 		for ($i = 0; $i < $length; $i++)
 		{
-			$result .= mt_rand(0, 9);
+			$values[] = $this->generator->randomDigit;
 		}
-	
-		return $result;
+		
+		return implode('', $values);
 	}
 	
 	/**

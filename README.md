@@ -12,7 +12,7 @@ Add the requirement to your `composer.json` file:
 ``` json
 {
     "require": {
-        "heri/faker": "*"
+        "heri/faker": "dev-master"
     }
 }
 ```
@@ -120,4 +120,4 @@ You can also set `null` to a column value in order to get the default value gene
 This module is released under the MIT license. See the complete license in the
 module:
 
-    Resources/meta/LICENSE
+    [Resources/meta/LICENSE](https://raw.github.com/heristop/RbsModuleFaker/master/Resources/meta/LICENSE)
