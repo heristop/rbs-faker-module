@@ -1,0 +1,24 @@
+language: php
+
+services:
+  - elasticsearch
+
+php:
+  - 5.4
+  - 5.5
+
+env:
+  - RBSCHANGE_VERSION=dev-master
+  
+before_install:
+ - composer require "rbschange/core":${RBSCHANGE_VERSION}
+ - composer update
+ - mysql -e 'create database rbschangetest;'
+
+script:
+ - cd Tests/
+ - phpunit --configuration phpunit.xml.dist
+ 
+matrix:
+    allow_failures:
+        - env: RBSCHANGE_VERSION=dev-master
